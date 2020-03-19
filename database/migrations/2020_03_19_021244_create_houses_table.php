@@ -14,7 +14,7 @@ class CreateHousesTable extends Migration
     public function up()
     {
         Schema::create('houses', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name_house');
             $table->string('house_type');
             $table->string('address');
@@ -22,7 +22,7 @@ class CreateHousesTable extends Migration
             $table->integer('bath_room_num');
             $table->string('description');
             $table->bigInteger('price');
-            $table->integer('user_id')->unsigned();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->boolean('status');
             $table->timestamps();

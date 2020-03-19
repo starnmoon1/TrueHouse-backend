@@ -14,11 +14,11 @@ class CreateCommentsTable extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('content');
             $table->string('name_customer');
             $table->string('email_customer');
-            $table->integer('houses_id')->unsigned();
+            $table->unsignedBigInteger('house_id');
             $table->foreign('house_id')->references('id')->on('houses');
             $table->timestamps();
         });
