@@ -22,7 +22,6 @@ class UserController extends Controller
      */
     public function index()
     {
-
         try {
             $users = $this->userService->getAll();
             $data = ['status' => 'success',
