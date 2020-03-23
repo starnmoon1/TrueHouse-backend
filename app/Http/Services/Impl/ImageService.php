@@ -40,7 +40,7 @@ class ImageService
                 }
             }
 
-            $check = $this->save($insert);
+            $check = $this->imgRepo->store($insert);
             $data = ['status' => 'success',
                 'data' => $check];
             return response()->json($data, 200);
