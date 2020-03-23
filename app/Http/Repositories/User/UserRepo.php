@@ -33,8 +33,24 @@ class UserRepo implements RepoInterface
         $obj->save();
     }
 
+    public function store($obj)
+    {
+        $obj->save();
+    }
+
     public function delete($obj)
     {
         $obj->delete();
     }
+
+    public function update($obj)
+    {
+        $obj->save();
+    }
+
+    public function destroy($obj)
+    {
+        $obj->delete();
+    }
+
 }

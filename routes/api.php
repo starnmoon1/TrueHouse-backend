@@ -18,6 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// api user
 Route::get('users', 'Api\UserController@index');
 Route::post('users', 'Api\UserController@store');
 Route::get('users/{id}', 'Api\UserController@show');
+
+//api house
+Route::get('houses', 'Api\HouseController@index');
+Route::post('houses', 'Api\HouseController@store');
+Route::get('/houses/{id}', 'Api\HouseController@show');
+
