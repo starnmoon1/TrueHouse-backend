@@ -28,3 +28,8 @@ Route::get('houses', 'Api\HouseController@index');
 Route::post('houses', 'Api\HouseController@store');
 Route::get('/houses/{id}', 'Api\HouseController@show');
 
+//api image
+Route::get('multiple-image', 'ImageController@index');
+Route::post('multiple-save', 'ImageController@save');
+
+
