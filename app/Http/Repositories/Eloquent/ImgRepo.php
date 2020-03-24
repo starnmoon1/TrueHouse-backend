@@ -20,7 +20,7 @@ class ImgRepo
 
     public function getImgByHouseId($house_id) {
         $image = new Image();
-        return $image->where('$house_id', '=', '$house_id')->get();
+        return $image->where('house_id', '=', $house_id)->get();
     }
 
     public function store($obj) {
