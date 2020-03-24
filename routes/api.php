@@ -18,6 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/login','Api\LoginController@login');
+Route::post('/login-social', 'SocialAuthController@authorizeSocial');
+//register
+Route::post('/register','Api\UserController@register');
+Route::get('/{id}','Api\UserController@findById');
 // api user
 Route::get('users', 'Api\UserController@index');
 Route::post('users', 'Api\UserController@store');
@@ -31,5 +36,4 @@ Route::get('houses/{id}', 'Api\HouseController@show');
 //api image
 Route::get('multiple-image/{id}', 'Api\ImageController@index');
 Route::post('multiple-image/{id}', 'Api\ImageController@store');
-
 

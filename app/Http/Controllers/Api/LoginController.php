@@ -25,8 +25,9 @@ class LoginController extends Controller
             'password' => $password
         ];
         if (Auth::attempt($data)) {
-            return response()->json(Auth::user());
+            return response()->json(['data'=>Auth::user(), 'message'=>'success']);
         }
+        else return response()->json(['message'=>'fail']);
     }
 
     public function logout($id){

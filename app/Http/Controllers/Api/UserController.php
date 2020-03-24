@@ -15,6 +15,9 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
+    public function register(Request $request) {
+        $this->userService->store($request);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -86,14 +89,8 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function findById($id) {
+        $user = $this->userService->findById($id);
+        return response()->json($user);
     }
 }
