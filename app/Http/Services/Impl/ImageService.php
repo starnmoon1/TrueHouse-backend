@@ -23,26 +23,24 @@ class ImageService
         return $this->imgRepo->getImgByHouseId($houseID);
     }
 
-    public function save($request)
+    public function save($request, $id)
     {
         try {
             request()->validate([
                 'image' => 'required',
                 'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-
             ]);
-            if ($image = $request->file('image')) {
-                foreach ($image as $files) {
+            if ($request->file('image')) {
+                $files = $request->file('image');
                     $destinationPath = 'public/image/';
-                    $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+                    $profileImage = date('His') . "-" . $files->getClientOriginalExtension();
                     $files->move($destinationPath, $profileImage);
-                    $insert[]['image'] = "$profileImage";
+                    $insert[]['url'] = $profileImage;
+                    $insert[]['house_id'] = $id;
                 }
-            }
-
-            $check = $this->imgRepo->store($insert);
+            $this->imgRepo->store($insert);
             $data = ['status' => 'success',
-                'data' => $check];
+                'data' => $profileImage];
             return response()->json($data, 200);
 
         } catch (\Exception $exception) {

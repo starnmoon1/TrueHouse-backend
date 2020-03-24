@@ -42,7 +42,6 @@ class HouseService implements HouseServiceInterface
             $house->price = $request->price;
             $house->user_id = $request->user_id;
             $house->status = $request->status;
-
             $this->houseRepo->store($house);
 
             $data = ['status' => 'success',

@@ -26,10 +26,10 @@ Route::get('users/{id}', 'Api\UserController@show');
 //api house
 Route::get('houses', 'Api\HouseController@index');
 Route::post('houses', 'Api\HouseController@store');
-Route::get('/houses/{id}', 'Api\HouseController@show');
+Route::get('houses/{id}', 'Api\HouseController@show');
 
 //api image
-Route::get('multiple-image', 'ImageController@index');
-Route::post('multiple-save', 'ImageController@save');
+Route::get('multiple-image/{id}', 'Api\ImageController@index');
+Route::post('multiple-image/{id}', 'Api\ImageController@store');
 
 
