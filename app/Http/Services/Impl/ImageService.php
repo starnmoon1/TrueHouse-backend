@@ -3,10 +3,9 @@
 
 namespace App\Http\Services\Impl;
 
-
+use App\House;
 use App\Http\Repositories\Eloquent\ImgRepo;
-use App\Http\Services\ImageServiceInterface;
-use Illuminate\Support\Facades\Request;
+use App\Image;
 
 class ImageService
 {
@@ -20,35 +19,47 @@ class ImageService
 
     public function index($houseID)
     {
-        return $this->imgRepo->getImgByHouseId($houseID);
+        try {
+            $image = $this->imgRepo->getImgByHouseId($houseID);
+            $data = [
+                'status' => 'success',
+                'data' => $image
+            ];
+            return response()->json($data, 200);
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'errors',
+                'message' => $exception
+            ];
+            return response()->json($data, 500);
+        }
     }
 
     public function save($request, $id)
     {
         try {
             request()->validate([
-                'image' => 'required',
-                'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                'file' => 'required',
+                'file.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
-            if ($request->file('image')) {
-                $files = $request->file('image');
-                    $destinationPath = 'public/image/';
-                    $profileImage = date('His') . "-" . $files->getClientOriginalExtension();
-                    $files->move($destinationPath, $profileImage);
-                    $insert[]['url'] = $profileImage;
-                    $insert[]['house_id'] = $id;
-                }
-            $this->imgRepo->store($insert);
-            $data = ['status' => 'success',
-                'data' => $profileImage];
-            return response()->json($data, 200);
-
+            if ($request->hasFile('file')) {
+                $image = new Image();
+                $file = $request->file('file');
+                $filename  = $file->getClientOriginalName();
+                // $extension = $file->getClientOriginalExtension();
+                $picture = date('His') . '-' . $filename;
+                $file->storeAs('public/images', $picture);
+                $image->url = $picture;
+                $image->house_id = $id;
+                $this->imgRepo->store($image);
+                $data = ['status' => 'success', 'data' => $image];
+                return response()->json($data, 200);
+            }
         } catch (\Exception $exception) {
-            $data = ['status' => 'errors',
-                'message' => $exception];
-            return response()->json($data, 404);
+            $file = $request->file('file');
+            $data = ['status' => $file, 'message' => $exception];
+            return response()->json($data, 501);
         }
-
     }
 
 
