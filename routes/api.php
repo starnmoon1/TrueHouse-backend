@@ -22,6 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('houses', 'Api\HouseController@index');
 Route::post('houses', 'Api\HouseController@store');
 Route::get('houses/{id}', 'Api\HouseController@show');
+Route::get('houses/{id}/orders', 'Api\OrderController@getOrdersByHouseID');
+
 
 Route::post('/login','Api\LoginController@login');
 Route::post('/login-social', 'SocialAuthController@authorizeSocial');
@@ -34,6 +36,7 @@ Route::get('/{id}','Api\UserController@findById');
 Route::get('users', 'Api\UserController@index');
 Route::post('users', 'Api\UserController@store');
 Route::get('users/{id}', 'Api\UserController@show');
+Route::get('users/{id}/houses', 'Api\UserController@getALlHouseByUserID');
 
 //api image
 Route::get('multiple-image/{id}', 'Api\ImageController@index');

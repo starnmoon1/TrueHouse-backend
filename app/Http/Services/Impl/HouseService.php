@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Services\Impl;
 
 use App\House;
@@ -9,7 +10,8 @@ class HouseService implements HouseServiceInterface
 {
     private $houseRepo;
 
-    public function __construct(HouseRepo $houseRepo) {
+    public function __construct(HouseRepo $houseRepo)
+    {
         $this->houseRepo = $houseRepo;
     }
 
@@ -76,6 +78,11 @@ class HouseService implements HouseServiceInterface
                 'message' => $exception];
             return response()->json($data, 404);
         }
+    }
+
+    public function getALlHouseByUserID($user_id)
+    {
+        return $this->houseRepo->getAllHouseByUserID($user_id);
     }
 
 }

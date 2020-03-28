@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 class UserRepo implements RepoInterface
 {
     private $user;
+
     public function __construct(User $user)
     {
         $this->user = $user;

@@ -4,15 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\Impl\HouseService;
+use App\Http\Services\User\UserService;
 use Illuminate\Http\Request;
 
 class HouseController extends Controller
 {
     private $houseService;
+    private $userService;
 
-    public function __construct(HouseService $houseService)
+    public function __construct(HouseService $houseService, UserService $userService)
     {
         $this->houseService = $houseService;
+        $this->userService = $userService;
     }
 
     public function index()
