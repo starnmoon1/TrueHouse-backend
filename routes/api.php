@@ -33,7 +33,7 @@ Route::post('/register','Api\UserController@register');
 Route::get('/{id}','Api\UserController@findById');
 
 // api user
-Route::get('users', 'Api\UserController@index');
+Route::get('users/list', 'Api\UserController@index');
 Route::post('users', 'Api\UserController@store');
 Route::get('users/{id}', 'Api\UserController@show');
 Route::get('users/{id}/houses', 'Api\UserController@getALlHouseByUserID');
@@ -41,4 +41,9 @@ Route::get('users/{id}/houses', 'Api\UserController@getALlHouseByUserID');
 //api image
 Route::get('multiple-image/{id}', 'Api\ImageController@index');
 Route::post('multiple-image/{id}', 'Api\ImageController@store');
+
+//api comment
+Route::get('comments/list', 'Api\CommentController@index');
+Route::post('comments', 'Api\CommentController@store');
+Route::get('comments/{id}', 'Api\CommentController@show');
 
