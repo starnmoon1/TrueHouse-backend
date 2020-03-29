@@ -19,11 +19,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //api house
+Route::get('houses/search', 'Api\HouseController@search');
 Route::get('houses', 'Api\HouseController@index');
 Route::post('houses', 'Api\HouseController@store');
 Route::get('houses/{id}', 'Api\HouseController@show');
 Route::get('houses/{id}/orders', 'Api\OrderController@getOrdersByHouseID');
-
 
 Route::post('/login','Api\LoginController@login');
 Route::post('/login-social', 'SocialAuthController@authorizeSocial');
@@ -42,3 +42,5 @@ Route::get('users/{id}/houses', 'Api\UserController@getALlHouseByUserID');
 Route::get('multiple-image/{id}', 'Api\ImageController@index');
 Route::post('multiple-image/{id}', 'Api\ImageController@store');
 
+//api order
+Route::post('order', 'Api\OrderController@store');

@@ -85,4 +85,18 @@ class HouseService implements HouseServiceInterface
         return $this->houseRepo->getAllHouseByUserID($user_id);
     }
 
+    public function getSearch($request)
+    {
+        try {
+            $house = $this->houseRepo->getSearch($request);
+            $data = ['status' => 'success',
+                'data' => $house];
+            return response()->json($data, 200);
+        } catch (\Exception $exception) {
+            $data = ['status' => 'errors',
+                'message' => $exception];
+            return response()->json($data, 500);
+        }
+    }
+
 }
