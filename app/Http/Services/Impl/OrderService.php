@@ -6,6 +6,7 @@ namespace App\Http\Services\Impl;
 
 use App\Http\Repositories\Eloquent\OrderRepo;
 use App\Http\Services\OrderServiceInterface;
+use App\Order;
 
 class OrderService implements OrderServiceInterface
 {
@@ -26,9 +27,28 @@ class OrderService implements OrderServiceInterface
         // TODO: Implement getAll() method.
     }
 
+
     public function store($request)
     {
-        // TODO: Implement store() method.
+        try {
+            $order = new Order();
+            $order->customer_name = $request->customer_name;
+            $order->customer_phone = $request->customer_phone;
+            $order->checkin = $request->checkin;
+            $order->checkout = $request->checkout;
+            $order->status = $request->status;
+            $order->totalPrice = $request->totalPrice;
+            $order->house_id = $request->house_id;
+            $order->user_id = $request->user_id;
+            $this->orderRepo->store($order);
+            $data = ['status' => 'success',
+                'data' => $order];
+            return response()->json($data, 201);
+        } catch (\Exception $exception) {
+            $data = ['status' => 'errors',
+                'message' => $exception];
+            return response()->json($data, 501);
+        }
     }
 
     public function update($request, $id)

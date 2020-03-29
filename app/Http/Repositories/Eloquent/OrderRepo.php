@@ -24,7 +24,7 @@ class OrderRepo implements OrderRepoInterface
 
     public function store($obj)
     {
-        // TODO: Implement store() method.
+        $obj->save();
     }
 
     public function update($obj)

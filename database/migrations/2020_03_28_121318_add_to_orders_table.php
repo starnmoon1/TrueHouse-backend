@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddVotesToOrdersTable extends Migration
+class AddToOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,7 @@ class AddVotesToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dateTime('checkout')->change();
-            $table->integer('totalPrice')->after('status');
-
-
+            $table->string('status')->nullable()->change();
         });
     }
 
@@ -29,7 +26,7 @@ class AddVotesToOrdersTable extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->date('checkout');
+            //
         });
     }
 }

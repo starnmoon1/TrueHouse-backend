@@ -25,7 +25,11 @@ class OrderController extends Controller
             return response()->json($order, $this->successStatus);
         } catch (Exception $exception) {
             return response()->json($exception, $this->errorStatus);
-
         }
+    }
+
+    public function store(Request $request)
+    {
+        return $this->orderService->store($request);
     }
 }

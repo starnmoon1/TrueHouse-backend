@@ -18,9 +18,11 @@ class CreateOrdersTable extends Migration
             $table->string('customer_name');
             $table->string('customer_phone');
             $table->dateTime('checkin');
-            $table->date('checkout');
-            $table->boolean('status');
+            $table->dateTime('checkout');
+            $table->string('status');
+            $table->integer('totalPrice');
             $table->unsignedBigInteger('house_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('house_id')->references('id')->on('houses');
             $table->timestamps();
         });

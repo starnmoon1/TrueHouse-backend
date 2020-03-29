@@ -42,4 +42,9 @@ class HouseController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        return $this->houseService->getSearch($request);
+    }
 }
