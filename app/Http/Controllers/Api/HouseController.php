@@ -35,7 +35,7 @@ class HouseController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        return $this->houseService->update($request, $id);
     }
 
     public function destroy($id)
@@ -46,5 +46,15 @@ class HouseController extends Controller
     public function search(Request $request)
     {
         return $this->houseService->getSearch($request);
+    }
+
+    public function getByHouse($id)
+    {
+        return $this->houseService->getByHouse($id);
+    }
+
+    public function getByUserId($id)
+    {
+        return $this->houseService->getByUserId($id);
     }
 }

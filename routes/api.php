@@ -24,6 +24,10 @@ Route::get('houses', 'Api\HouseController@index');
 Route::post('houses', 'Api\HouseController@store');
 Route::get('houses/{id}', 'Api\HouseController@show');
 Route::get('houses/{id}/orders', 'Api\OrderController@getOrdersByHouseID');
+Route::patch('houses/{id}/update', 'Api\HouseController@update');
+Route::get('houses/{id}/list-order', 'Api\HouseController@getByHouse');
+Route::get('houses/{id}/list-order-by-user', 'Api\HouseController@getByUserId');
+
 
 Route::post('/login','Api\LoginController@login');
 Route::post('/login-social', 'SocialAuthController@authorizeSocial');

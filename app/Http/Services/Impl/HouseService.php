@@ -19,12 +19,16 @@ class HouseService implements HouseServiceInterface
     {
         try {
             $house = $this->houseRepo->getAll();
-            $data = ['status' => 'success',
-                'data' => $house];
+            $data = [
+                'status' => 'success',
+                'data' => $house
+            ];
             return response()->json($data, 200);
         } catch (\Exception $exception) {
-            $data = ['status' => 'errors',
-                'message' => $exception];
+            $data = [
+                'status' => 'errors',
+                'message' => $exception
+            ];
             return response()->json($data, 500);
         }
     }
@@ -46,36 +50,58 @@ class HouseService implements HouseServiceInterface
             $house->status = $request->status;
             $this->houseRepo->store($house);
 
-            $data = ['status' => 'success',
-                'data' => $house];
+            $data = [
+                'status' => 'success',
+                'data' => $house
+            ];
             return response()->json($data, 201);
         } catch (\Exception $exception) {
-            $data = ['status' => 'errors',
-                'message' => $exception];
+            $data = [
+                'status' => 'errors',
+                'message' => $exception
+            ];
             return response()->json($data, 501);
         }
     }
 
     public function update($request, $id)
     {
-        # code...
+        try {
+            $user = $this->houseRepo->findById($id);
+            $user->status = $request->status;
+            $this->houseRepo->update($user);
+            $data = [
+                'status' => 'success',
+                'data' => $user
+            ];
+            return response()->json($data, 201);
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'errors',
+                'message' => $exception
+            ];
+            return response()->json($data, 501);
+        }
     }
 
     public function destroy($id)
     {
-
     }
 
     public function findById($id)
     {
         try {
             $house = $this->houseRepo->findById($id);
-            $data = ['status' => 'success',
-                'data' => $house];
+            $data = [
+                'status' => 'success',
+                'data' => $house
+            ];
             return response()->json($data, 200);
         } catch (\Exception $exception) {
-            $data = ['status' => 'errors',
-                'message' => $exception];
+            $data = [
+                'status' => 'errors',
+                'message' => $exception
+            ];
             return response()->json($data, 404);
         }
     }
@@ -89,14 +115,54 @@ class HouseService implements HouseServiceInterface
     {
         try {
             $house = $this->houseRepo->getSearch($request);
-            $data = ['status' => 'success',
-                'data' => $house];
+            $data = [
+                'status' => 'success',
+                'data' => $house
+            ];
             return response()->json($data, 200);
         } catch (\Exception $exception) {
-            $data = ['status' => 'errors',
-                'message' => $exception];
+            $data = [
+                'status' => 'errors',
+                'message' => $exception
+            ];
             return response()->json($data, 500);
         }
     }
 
+    public function getByHouse($id)
+    {
+        try {
+            $house = $this->houseRepo->getByHouse($id);
+            $data = [
+                'status' => 'success',
+                'data' => $house
+            ];
+            return response()->json($data, 200);
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'errors',
+                'message' => $exception
+            ];
+            return response()->json($data, 500);
+        }
+    }
+
+    public function getByUserId($id)
+    {
+
+        try {
+            $house = $this->houseRepo->getByUserId($id);
+            $data = [
+                'status' => 'success',
+                'data' => $house
+            ];
+            return response()->json($data, 200);
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'errors',
+                'message' => $exception
+            ];
+            return response()->json($data, 500);
+        }
+    }
 }
