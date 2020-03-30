@@ -61,4 +61,20 @@ class HouseRepo implements HouseInterface
         OR `bath_room_num` LIKE '$bathRoom'
         OR `price` LIKE '$price'");
     }
+
+    public function getByHouse($id)
+    {
+        return DB::select("SELECT * FROM `orders`
+        INNER JOIN `houses` ON orders.house_id = houses.id
+        INNER JOIN `users` ON orders.user_id = users.id
+        WHERE houses.user_id = $id");
+    }
+
+    public function getByUserId($id)
+    {
+        return DB::select("SELECT * FROM `orders`
+        INNER JOIN `houses` ON orders.house_id = houses.id
+        INNER JOIN `users` ON orders.user_id = users.id
+        WHERE users.id = $id");
+    }
 }
