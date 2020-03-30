@@ -52,3 +52,8 @@ Route::post('order', 'Api\OrderController@store');
 Route::get('comments/list', 'Api\CommentController@index');
 Route::post('comments', 'Api\CommentController@store');
 Route::get('comments/{id}', 'Api\CommentController@show');
+
+//api comment
+Route::get('comments/list', 'Api\CommentController@index');
+Route::post('comments', 'Api\CommentController@store');
+Route::get('comments/{id}', 'Api\CommentController@show');

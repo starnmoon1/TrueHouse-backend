@@ -37,6 +37,7 @@ class CommentService
             $comment->user_id = $request->user_id;
             $comment->house_id = $request->house_id;
             $comment->rating = $request->rating;
+            $this->commentRepo->save($comment);
 
             $data = ['status' => 'success',
                 'data' => $comment];
