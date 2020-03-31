@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('houses', 'Api\HouseController@index');
 Route::post('houses', 'Api\HouseController@store');
 Route::get('houses/{id}', 'Api\HouseController@show');
+//api get orders by house id
 Route::get('houses/{id}/orders', 'Api\OrderController@getOrdersByHouseID');
 
 
