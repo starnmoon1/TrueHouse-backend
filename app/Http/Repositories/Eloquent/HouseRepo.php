@@ -50,16 +50,48 @@ class HouseRepo implements HouseInterface
 
     public function getSearch($obj)
     {
-        $address = $obj->address;
-        $bedRoom = $obj->bed_room_num;
-        $bathRoom = $obj->bath_room_num;
-        $price = $obj->price;
+        $address = null;
+        $bedRoom = null;
+        $bathRoom = null;
+        $price = null;
+        if ($obj->address != null) {
+            $address = "AND `address` LIKE '%$obj->address%'";
+        }
+        if ($obj->address == 'null') {
+            $address = null;
+        }
 
+        if ($obj->bed_room_num != null) {
+            $bedRoom = "AND `bed_room_num` = '$obj->bed_room_num'";
+        }
+        if ($obj->bed_room_num == 'null') {
+            $bedRoom = null;
+        }
+
+        if ($obj->bath_room_num != null) {
+            $bathRoom = "AND `bath_room_num` = '$obj->bath_room_num'";
+        }
+        if ($obj->bath_room_num == 'null') {
+            $bathRoom = null;
+        }
+
+        if ($obj->price != null) {
+            $price = "AND `price` = '$obj->price'";
+        }
+        if ($obj->price == 'null') {
+            $price = null;
+        }
+
+        $start = $obj->start;
+        $end = $obj->end;
         return DB::select("SELECT * FROM `houses`
-        WHERE `address` LIKE '%$address%'
-        OR `bed_room_num` LIKE '$bedRoom'
-        OR `bath_room_num` LIKE '$bathRoom'
-        OR `price` LIKE '$price'");
+        WHERE (`updated_at` >= '$start'
+        AND `updated_at` <= '$end')
+        $address
+        $bedRoom
+        $bathRoom
+        $price
+        ");
     }
 
     public function getByHouse($id)
