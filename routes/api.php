@@ -57,3 +57,5 @@ Route::get('comments/{id}', 'Api\CommentController@show');
 Route::get('comments/list', 'Api\CommentController@index');
 Route::post('comments', 'Api\CommentController@store');
 Route::get('comments/{id}', 'Api\CommentController@show');
+
+Route::get('comments/rating/{id}', 'Api\CommentController@showRating');
